@@ -11,12 +11,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # ---- System dependencies ----
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git wget curl ca-certificates \
+        build-essential python3-dev \
         python3 python3-pip python3-venv \
         libgl1 libglib2.0-0 \
         openssh-server \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/lib/apt/lists/*
-
 
 WORKDIR /
 
