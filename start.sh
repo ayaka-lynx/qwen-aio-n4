@@ -21,7 +21,7 @@ dl_civitai() {
     local version_id="$1" subdir="$2" fname="$3"
     local dest="${MODELS_DIR}/${subdir}"
     if [ -f "${dest}/${fname}" ]; then
-        echo "[skip] ${subdir}/${fname} は既に存在"
+        echo "[skip] ${subdir}/${fname} already exists."
         return 0
     fi
     mkdir -p "${dest}"

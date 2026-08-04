@@ -3,17 +3,17 @@ name: build-and-push
 on:
   push:
     branches: [main]
-  workflow_dispatch:   # 手動実行も可
+  workflow_dispatch:
 
 env:
-  IMAGE_NAME: comfyui-runpod
+  IMAGE_NAME: qwen-aio-n4
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write   # ghcr.io への push に必須
+      packages: write
 
     steps:
       - name: Checkout
@@ -27,13 +27,12 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}   # PAT 不要
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels)
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # owner に大文字が混じってても自動で小文字化してくれる
           images: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest
