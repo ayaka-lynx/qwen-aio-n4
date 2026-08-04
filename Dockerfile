@@ -17,22 +17,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /workspace
+
+WORKDIR /
 
 # ---- ComfyUI ----
 ARG COMFYUI_REF=master
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
-    cd ComfyUI && git checkout ${COMFYUI_REF}
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git /ComfyUI && \
+    cd /ComfyUI && git checkout ${COMFYUI_REF}
 
 # ---- PyTorch (cu124) + ComfyUI requirements + HF CLI ----
 RUN pip install --upgrade pip && \
     pip install torch torchvision torchaudio \
         --index-url https://download.pytorch.org/whl/cu124 && \
-    pip install -r ComfyUI/requirements.txt && \
+    pip install -r /ComfyUI/requirements.txt && \
     pip install "huggingface_hub[cli]" hf_transfer
 
 # ---- Custom nodes ----
-WORKDIR /workspace/ComfyUI/custom_nodes
+WORKDIR /ComfyUI/custom_nodes
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git && \
     git clone https://github.com/rgthree/rgthree-comfy && \
@@ -44,10 +45,10 @@ RUN for d in */ ; do \
     done
 
 # ---- Startup script ----
-WORKDIR /workspace
-COPY start.sh /workspace/start.sh
-RUN chmod +x /workspace/start.sh
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
+WORKDIR /
 EXPOSE 8188
 
-CMD ["/workspace/start.sh"]
+CMD ["/start.sh"]

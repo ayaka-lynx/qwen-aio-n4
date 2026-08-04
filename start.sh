@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+COMFY_DIR="/ComfyUI"
 MODELS_DIR="/workspace/ComfyUI/models"
 
 # ---- Model collection helper ----
@@ -43,7 +44,7 @@ dl_civitai 3172362 loras snofs_krea_v1_2.safetensors    # https://civitai.com/mo
 dl_civitai 2316696 loras Qwen4Play_v2.safetensors       # https://civitai.com/models/2004155/qwen-4-play-aio-nsfw-qwen-lora-by-dr34msc4pe?modelVersionId=2316696
 
 # ---- Boot ComfyUI ----
-cd /workspace/ComfyUI
+cd "${COMFY_DIR}"
 exec python main.py \
     --listen 0.0.0.0 \
     --port 8188 \
