@@ -36,7 +36,7 @@ WORKDIR /workspace/ComfyUI/custom_nodes
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git && \
     git clone https://github.com/rgthree/rgthree-comfy && \
-    git clone https://github.com/chflame163/ComfyUI_LayerStyle && \
+    git clone https://github.com/chflame163/ComfyUI_LayerStyle
 RUN for d in */ ; do \
         if [ -f "${d}requirements.txt" ]; then \
             pip install -r "${d}requirements.txt" ; \
