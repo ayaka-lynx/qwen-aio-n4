@@ -61,7 +61,7 @@ dl_civitai 2316696 loras Qwen4Play_v2.safetensors # https://civitai.com/models/2
 
 
 # ---- Boot ComfyUI ----
-cd /workspace/ComfyUI
+cd /ComfyUI
 exec python main.py \
     --listen 0.0.0.0 \
     --port 8188 \
