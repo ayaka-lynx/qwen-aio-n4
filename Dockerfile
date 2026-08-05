@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 # ---- Base image (CUDA + cuDNN runtime) ----
-FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
+FROM nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
@@ -28,7 +28,7 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git /ComfyUI && \
 # ---- PyTorch (cu124) + ComfyUI requirements + HF CLI ----
 RUN pip install --upgrade pip && \
     pip install torch torchvision torchaudio \
-        --index-url https://download.pytorch.org/whl/cu124 && \
+        --index-url https://download.pytorch.org/whl/cu128 && \
     pip install -r /ComfyUI/requirements.txt && \
     pip install "huggingface_hub[cli]" hf_transfer
 
